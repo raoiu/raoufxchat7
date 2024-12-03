@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAOUF X CHAT</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screen-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .screen-overlay h1 {
+            font-size: 50px;
+            color: white;
+            text-shadow: 0 0 10px #ff6ec7, 0 0 20px #ff6ec7, 0 0 30px #ff6ec7;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #ff6ec7, 0 0 20px #ff6ec7, 0 0 30px #ff6ec7;
+            }
+            to {
+                text-shadow: 0 0 20px #ff6ec7, 0 0 40px #ff6ec7, 0 0 60px #ff6ec7;
+            }
+        }
+
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .content {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            display: none;
+            animation: fadeInBox 1s ease-out;
+            border: 5px solid transparent;
+            background-clip: padding-box;
+            animation: rgbBorder 1.5s infinite alternate;
+        }
+
+        @keyframes fadeInBox {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rgbBorder {
+            0% { border-color: red; }
+            20% { border-color: yellow; }
+            40% { border-color: green; }
+            60% { border-color: cyan; }
+            80% { border-color: blue; }
+            100% { border-color: magenta; }
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+            }
+            100% {
+                transform: scale(1.1);
+                box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+            }
+        }
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 32px;
+            text-decoration: none;
+            transition: transform 0.3s, color 0.3s, background 0.3s;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.2);
+        }
+
+        /* Volume Control */
+        .volume-control {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .volume-slider {
+            width: 150px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+        }
+
+        .volume-icon {
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="screen-overlay" id="overlay">
+        <h1>Click to Enter</h1>
+    </div>
+
+    <video class="video-background" autoplay muted loop id="background-video">
+        <source src="mylivewallpapers-com-Sad-Itachi-FHD.mp4" type="video/mp4">
+    </video>
+
+    <audio id="background-audio" autoplay>
+        <source src="RAOUF_19.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="content" id="content">
+        <div class="profile-image">
+            <img src="circular_image.png" alt="Profile Picture">
+        </div>
+        <h1>RAOUF X CHAT</h1>
+        <div>Welcome All</div>
+        <div class="social-links">
+            <a href="https://www.instagram.com/raouf_.lb2/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@raouf_.x._chat" target="_blank" class="tiktok"><i class="fab fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@RAOUFxCHAT" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+            <a href="https://discord.gg/DYxmstBgfv" target="_blank" class="discord"><i class="fab fa-discord"></i></a>
+        </div>
+
+        <!-- Volume Control Section -->
+        <div class="volume-control">
+            <i class="volume-icon fas fa-volume-up" id="volume-icon"></i>
+            <input type="range" min="0" max="1" step="0.01" value="0.5" class="volume-slider" id="volume-slider">
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('overlay');
+        const content = document.getElementById('content');
+        const audio = document.getElementById('background-audio');
+        const volumeSlider = document.getElementById('volume-slider');
+        const volumeIcon = document.getElementById('volume-icon');
+
+        // Loop the audio
+        audio.addEventListener('ended', () => {
+            audio.currentTime = 0;
+            audio.play();
+        });
+
+        // Show content and play audio
+        overlay.addEventListener('click', () => {
+            overlay.style.animation = 'fadeOut 0.5s ease-out';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                content.style.display = 'block';
+                audio.play();
+            }, 500);
+        });
+
+        // Control volume
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+        });
+
+        volumeIcon.addEventListener('click', () => {
+            audio.muted = !audio.muted;
+            volumeIcon.classList.toggle('fa-volume-mute', audio.muted);
+            volumeIcon.classList.toggle('fa-volume-up', !audio.muted);
+        });
+    </script>
+</body>
+</html>
